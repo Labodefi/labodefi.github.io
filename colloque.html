@@ -5,11 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Colloques — Laboratoire DEFI</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ===== Identique aux autres pages ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #333;
       background-color: #f9f9f9;
     }
+    a {
+      text-decoration: none;
+      color: #1a5276;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
     header {
       background-color: #1a5276;
       color: white;
@@ -22,6 +38,7 @@
       display: block;
       margin: 0 auto;
     }
+
     nav {
       background-color: #2874a6;
       padding: 0.8rem 0;
@@ -43,15 +60,38 @@
       font-weight: 500;
       padding: 0.4rem 0.8rem;
       border-radius: 4px;
-      text-decoration: none;
+      transition: background 0.2s;
     }
     .nav-menu a:hover {
       background-color: rgba(255,255,255,0.15);
     }
+
     main {
-      /* Aucun contenu n’est affiché — hauteur minimale pour éviter le "site vide" */
-      min-height: 2rem;
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 3rem;
+      text-align: center;
     }
+
+    h1 {
+      color: #1a5276;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    .placeholder {
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+      padding: 1.5rem;
+      border: 1px dashed #d5d5d5;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
     footer {
       background-color: #1a5276;
       color: white;
@@ -59,12 +99,41 @@
       padding: 1.2rem;
       margin-top: 2rem;
     }
+
     /* Mobile menu */
-    .menu-toggle { display: none; }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
     @media (max-width: 768px) {
-      .nav-menu { display: none; }
-      .menu-toggle { display: flex; flex-direction: column; cursor: pointer; padding: 0.5rem; }
-      .bar { width: 25px; height: 3px; background-color: white; margin: 3px 0; }
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        background-color: #1a5276;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      main {
+        margin: 1.5rem;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -95,7 +164,11 @@
   </nav>
 
   <main>
-    <!-- Rien n'est affiché ici -->
+    <h1>Colloques et Événements Scientifiques</h1>
+    <div class="placeholder">
+      Cette rubrique sera alimentée ultérieurement.<br>
+      Restez informés des prochains appels à communications et événements du laboratoire DEFI.
+    </div>
   </main>
 
   <footer>
@@ -121,4 +194,3 @@
   </script>
 </body>
 </html>
-
