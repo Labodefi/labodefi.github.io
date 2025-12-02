@@ -182,7 +182,6 @@
     .toggle-btn.active::after {
       transform: rotate(180deg);
     }
-    /* Si JS désactivé */
     .no-js .summary-preview,
     .no-js .summary-full {
       display: block !important;
@@ -248,8 +247,8 @@
         <li><a href="presentation.html">Présentation</a></li>
         <li><a href="index.html#axes">Axes</a></li>
         <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="Publications.html">Publications</a></li>
-        <li><a href="Evénements.html">Evénements</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="colloque.html">Colloques</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </div>
@@ -287,7 +286,6 @@
             Édition DEFI, 2025 — 220 p. — ISBN: 978-9931-9994-6-1
           </div>
 
-          <!-- ✅ RÉSUMÉ REPLIABLE -->
           <div class="summary-preview" id="summary-preview-1">
             Cet ouvrage réalisé sous la direction de Mouloud GUERCHOUH explore la montée en puissance de la Responsabilité Sociétale des Entreprises (RSE) comme réponse aux dérives d’un modèle économique fondé sur la consommation excessive et la dégradation environnementale. Les entreprises, désormais conscientes de leur rôle dans la préservation de la planète, intègrent les principes du Développement Durable à travers la RSE, véritable levier de transformation stratégique et organisationnelle...
           </div>
@@ -301,12 +299,13 @@
           </div>
           <button class="toggle-btn" onclick="toggleSummary(1)">Lire la suite</button>
 
-          <a href="https://drive.google.com/file/d/1p0NInAWmZC41diTH6qvtCnSQIq0uCOQF/view?usp=sharing" 
-             class="btn" 
-             download="Extrait_Gouvernance_DEFI.pdf"
+          <!-- ✅ BOUTON CORRIGÉ : lien de téléchargement direct -->
+          <a href="https://drive.google.com/uc?export=download&id=1p0NInAWmZC41diTH6qvtCnSQIq0uCOQF"
+             class="btn"
+             download="Fiche_RSE_DEFI.pdf"
              target="_blank"
              rel="noopener noreferrer">
-             Extrait
+             Télécharger le livre
           </a>
         </div>
       </div>
@@ -335,7 +334,6 @@
             Édition DEFI, 2025 — 220 p. — ISBN: 978-9931-9994-7-8
           </div>
 
-          <!-- ✅ RÉSUMÉ REPLIABLE -->
           <div class="summary-preview" id="summary-preview-2">
             Cet ouvrage, issu de plusieurs années de recherche et fondé sur nos travaux doctoraux ainsi que sur les projets CNEPRU et PRFU, propose une analyse approfondie des systèmes de gouvernance et de leur impact sur l’efficience organisationnelle des grandes entreprises, notamment en Algérie. Il allie rigueur scientifique et accessibilité, offrant à la fois une réflexion théorique solide et un outil de vulgarisation destiné à un large public...
           </div>
@@ -348,8 +346,8 @@
           </div>
           <button class="toggle-btn" onclick="toggleSummary(2)">Lire la suite</button>
 
-          <a href="https://drive.google.com/uc?export=download&id=1VsqdF_yZkE1h-O5a8XsG-b-IyxVjIb5Y--" 
-             class="btn" 
+          <a href="https://drive.google.com/uc?expo----------------"
+             class="btn"
              download="Extrait_Gouvernance_DEFI.pdf"
              target="_blank"
              rel="noopener noreferrer">
@@ -371,24 +369,21 @@
   </footer>
 
   <script>
-    // Supprime no-js si JS activé
     document.documentElement.classList.remove('no-js');
     
     function toggleSummary(id) {
       const full = document.getElementById('summary-full-' + id);
-      const btn = event.target;
       if (full.style.display === 'block') {
         full.style.display = 'none';
-        btn.classList.remove('active');
-        btn.textContent = 'Lire la suite';
+        event.target.classList.remove('active');
+        event.target.textContent = 'Lire la suite';
       } else {
         full.style.display = 'block';
-        btn.classList.add('active');
-        btn.textContent = 'Masquer';
+        event.target.classList.add('active');
+        event.target.textContent = 'Masquer';
       }
     }
 
-    // Mobile menu
     document.getElementById('mobile-menu').addEventListener('click', function() {
       const navMenu = document.getElementById('nav-menu');
       navMenu.classList.toggle('active');
@@ -406,7 +401,4 @@
     });
   </script>
 </body>
-
 </html>
-
-
