@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEFI — Laboratoire de Recherche</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: #1a5276;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ===== Layout ===== */
+    header {
+      background-color: #1a5276;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .logo p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      background-color: #2874a6;
+      padding: 0.8rem 0;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .nav-menu a {
+      color: white;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .nav-menu a:hover {
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(26, 82, 118, 0.9), rgba(26, 82, 118, 0.8)), url('https://images.unsplash.com/photo-1553877522-4324936051-f9e84e476e02?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 2.5rem;
+    }
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 1.8rem;
+      transition: transform 0.3s;
+    }
+    .section-card:hover {
+      transform: translateY(-5px);
+    }
+    .section-card h3 {
+      color: #1a5276;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    .section-card ul {
+      padding-left: 1.5rem;
+    }
+    .section-card li {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: #1a5276;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    footer p {
+      margin: 0.3rem 0;
+    }
+
+    /* ===== Mobile Menu ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        background-color: #1a5276;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero h2 { font-size: 1.8rem; }
+      .hero p { font-size: 1rem; }
+    }
+	.logo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.section-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+.section-card-link:hover .section-card {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+  </style>
+</head>
+<body>
+  <header>
+<div class="logo">
+  <img src="logo-defi.png" alt="Logo du Laboratoire DEFI - Développement, Économie, Finance et Institutions" width="300">
+</div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <div class="menu-toggle" id="mobile-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="index.html#axes">Axes</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="colloque.html">Colloques</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h2>Recherche en économie, finance et développement</h2>
+      <p>Au cœur de la Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion — Université Mouloud Mammeri de Tizi-Ouzou.</p>
+    </section>
+
+    <section class="sections">
+   <a href="presentation.html" class="section-card-link">
+  <div class="section-card" id="presentation">
+    <h3>Présentation</h3>
+    <p>Le laboratoire <strong>DEFI</strong> (Développement, Économie, Finance et Institutions) est une unité de recherche dédiée à l’analyse des enjeux économiques et institutionnels au niveau local, national et international.</p>
+  </div>
+</a>
+
+      <div class="section-card" id="axes">
+        <h3>Axes de Recherche</h3>
+        <ul>
+          <li>Développement économique et inégalités</li>
+          <li>Finance publique et politique budgétaire</li>
+          <li>Institutions et gouvernance économique</li>
+          <li>Économie de l’énergie et transition écologique</li>
+        </ul>
+      </div>
+
+      <div class="section-card" id="equipe">
+        <h3>Équipe</h3>
+        <p>Composée de professeurs, maîtres de conférences, doctorants et chercheurs associés, l’équipe DEFI encourage la collaboration interdisciplinaire et les partenariats académiques.</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="contact">
+      <h3>Contact</h3>
+      <p><strong>Adresse :</strong> Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion<br>
+      Université Mouloud Mammeri — Tizi-Ouzou, Algérie</p>
+      <p><strong>Courriel :</strong> <a href="mailto:contact.defi@ummto.dz">contact.defi@ummto.dz</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Laboratoire DEFI © 2025 — Université Mouloud Mammeri de Tizi-Ouzou</p>
+    <p>Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('active');
+      
+      // Animation du burger → ×
+      const bars = this.querySelectorAll('.bar');
+      this.classList.toggle('active');
+      if (this.classList.contains('active')) {
+        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+      } else {
+        bars[0].style.transform = 'rotate(0)';
+        bars[1].style.opacity = '1';
+        bars[2].style.transform = 'rotate(0)';
+      }
+    });
+  </script>
+</body>
+</html>

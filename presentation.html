@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Présentation — Laboratoire DEFI</title>
+  <style>
+    /* ===== Identique à index.html pour cohérence ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: #1a5276;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    header {
+      background-color: #1a5276;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      background-color: #2874a6;
+      padding: 0.8rem 0;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .nav-menu a {
+      color: white;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .nav-menu a:hover {
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+    }
+
+    h1 {
+      color: #1a5276;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    h2 {
+      color: #2874a6;
+      margin: 1.8rem 0 1rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #eaecef;
+      padding-bottom: 0.4rem;
+    }
+    p, ul {
+      margin-bottom: 1.2rem;
+    }
+    ul {
+      padding-left: 1.8rem;
+    }
+    li {
+      margin-bottom: 0.6rem;
+    }
+
+    .highlight {
+      background-color: #f0f7fb;
+      padding: 1.2rem;
+      border-left: 4px solid #3498db;
+      border-radius: 0 6px 6px 0;
+      margin: 1.5rem 0;
+    }
+
+    footer {
+      background-color: #1a5276;
+      color: white;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    /* ===== Mobile Menu ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        background-color: #1a5276;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      main {
+        margin: 1.5rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo-defi.png" alt="Logo du Laboratoire DEFI" width="280">
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <div class="menu-toggle" id="mobile-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="index.html#axes">Axes</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="colloque.html">Colloques</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Présentation du Laboratoire DEFI</h1>
+
+    <p>
+      Le laboratoire <strong>DEFI</strong> (<em>Développement, Économie, Finance et Institutions</em>) est une unité de recherche rattachée à la <strong>Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion</strong> de l’<strong>Université Mouloud Mammeri de Tizi-Ouzou (UMMTO)</strong>.
+    </p>
+
+    <p>
+      Créé pour répondre aux défis scientifiques et sociétaux contemporains, DEFI mobilise des chercheurs en économie, finance, gestion et sciences sociales autour d’une approche interdisciplinaire, rigoureuse et ancrée dans les réalités algériennes et méditerranéennes.
+    </p>
+
+    <div class="highlight">
+      <p>📍 <strong>Localisation :</strong> Campus universitaire de Tizi-Ouzou, Algérie<br>
+      📅 <strong>Création :</strong> 2020 (sous agrément ministériel)<br>
+      👥 <strong>Effectif :</strong> 18 enseignants-chercheurs permanents + 12 doctorants</p>
+    </div>
+
+    <h2 id="mission">Mission</h2>
+    <p>
+      La mission du laboratoire DEFI est triple :
+    </p>
+    <ul>
+      <li>.Produire des connaissances scientifiques originales sur les questions de développement économique, de stabilité financière et de qualité institutionnelle ;</li>
+      <li>Former les nouvelles générations de chercheurs et d’experts en économie appliquée ;</li>
+      <li>Contribuer, par des expertises et des diagnostics, aux politiques publiques nationales et locales.</li>
+    </ul>
+
+    <h2 id="objectifs">Objectifs Scientifiques</h2>
+    <ul>
+      <li>Analyser les dynamiques de développement économique durable en Algérie et dans la région MENA ;</li>
+      <li>Étudier les réformes budgétaires, fiscales et financières en contexte de contrainte ;</li>
+      <li>Évaluer l’impact des institutions formelles et informelles sur la croissance et l’équité ;</li>
+      <li>Favoriser les publications dans des revues scientifiques indexées;</li>
+      <li>Développer des partenariats avec des laboratoires nationaux et internationaux.</li>
+    </ul>
+
+    <h2 id="valeurs">Valeurs</h2>
+    <p>
+      Le laboratoire DEFI s’appuie sur des principes fondamentaux :
+    </p>
+    <ul>
+      <li><strong>Rigueur scientifique</strong> : méthodologie transparente, données vérifiables ;</li>
+      <li><strong>Indépendance</strong> : liberté académique, absence de conflit d’intérêt ;</li>
+      <li><strong>Ouverture</strong> : collaboration interdisciplinaire, diffusion ouverte des résultats ;</li>
+      <li><strong>Responsabilité sociale</strong> : recherche utile à la société et aux décideurs.</li>
+    </ul>
+
+    <h2>Organisation</h2>
+    <p>
+      DEFI est structuré en trois équipes thématiques :
+    </p>
+    <ul>
+      <li><strong>Équipe 1</strong> : Économie du développement et inégalités</li>
+      <li><strong>Équipe 2</strong> : Finance publique et politique macroéconomique</li>
+      <li><strong>Équipe 3</strong> : Institutions, gouvernance et économie politique</li>
+    </ul>
+    <p>
+      Chaque équipe est pilotée par un responsable scientifique et organise des séminaires mensuels ouverts aux doctorants et partenaires.
+    </p>
+  </main>
+
+  <footer>
+    <p>Laboratoire DEFI © 2025 — UMMTO</p>
+  </footer>
+
+  <script>
+    // Identique à index.html
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('active');
+      const bars = this.querySelectorAll('.bar');
+      this.classList.toggle('active');
+      if (this.classList.contains('active')) {
+        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+      } else {
+        bars[0].style.transform = 'rotate(0)';
+        bars[1].style.opacity = '1';
+        bars[2].style.transform = 'rotate(0)';
+      }
+    });
+  </script>
+
+</body>
+</html>

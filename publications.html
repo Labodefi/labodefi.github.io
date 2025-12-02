@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — Laboratoire DEFI</title>
+  <style>
+    /* ===== Identique aux autres pages ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: #1a5276;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    header {
+      background-color: #1a5276;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      background-color: #2874a6;
+      padding: 0.8rem 0;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .nav-menu a {
+      color: white;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .nav-menu a:hover {
+      background-color: rgba(255,255,255,0.15);
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+    }
+
+    h1 {
+      color: #1a5276;
+      text-align: center;
+      margin-bottom: 1.8rem;
+      font-size: 2rem;
+    }
+    h2 {
+      color: #2874a6;
+      margin: 2rem 0 1.2rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #eaecef;
+      padding-bottom: 0.4rem;
+    }
+    .publication {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+    .publication:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .publication-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1a5276;
+      margin-bottom: 0.4rem;
+    }
+    .publication-authors {
+      margin-bottom: 0.6rem;
+    }
+    .publication-details {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .btn {
+      display: inline-block;
+      background: #1a5276;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #154a67;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: #1a5276;
+      color: white;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    /* ===== Résumé repliable ===== */
+    .summary-preview {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    .summary-full {
+      display: none;
+      margin-top: 0.8rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #444;
+    }
+    .toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      color: #1a5276;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+    .toggle-btn:hover {
+      text-decoration: underline;
+    }
+    .toggle-btn::after {
+      content: "▼";
+      font-size: 0.7em;
+      transition: transform 0.3s;
+    }
+    .toggle-btn.active::after {
+      transform: rotate(180deg);
+    }
+    /* Si JS désactivé */
+    .no-js .summary-preview,
+    .no-js .summary-full {
+      display: block !important;
+      -webkit-line-clamp: unset;
+    }
+    .no-js .toggle-btn {
+      display: none;
+    }
+
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        background-color: #1a5276;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      main {
+        margin: 1.5rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo-defi.png" alt="Logo du Laboratoire DEFI" width="280">
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <div class="menu-toggle" id="mobile-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="index.html#axes">Axes</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="Publications.html">Publications</a></li>
+        <li><a href="Evénements.html">Evénements</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Publications du Laboratoire DEFI</h1>
+
+    <p>
+      Le laboratoire DEFI valorise ses travaux de recherche à travers des publications scientifiques de haut niveau, notamment des <strong>ouvrages collectifs</strong> (actes de colloques, ouvrages dirigés) et des <strong>monographies individuelles</strong>. Ci-dessous, une sélection des publications récentes.
+    </p>
+
+    <h2>Ouvrages collectifs et individuels</h2>
+
+    <!-- Premier ouvrage -->
+    <div class="publication">
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
+        <div style="flex: 0 0 200px; max-width: 200px;">
+          <img src="couvertures/guercouhouvrage.png" 
+               alt="Couverture : La Responsabilité Sociétale des Entreprises (RSE) en Algérie"
+               style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <div class="publication-title">
+            La Responsabilité Sociétale des Entreprises (RSE) en Algérie
+            <p style='text-align: left; margin: 0; margin-top: 0px; padding-bottom: 5px; padding-left: 0px; padding-right: 0px; font-family: Segoe UI; font-size: 16px; color: #285982; background-color: white;'>
+              Enjeux, Opportunités et Perspectives
+            </p>
+          </div>
+          <div class="publication-authors">
+            <div>Sous la direction de <b>Mouloud GUERCHOUH</b></div>
+            <div>Préface <b>Belaid ABRIKA</b></div>
+          </div>
+          <div class="publication-details">
+            Édition DEFI, 2025 — 220 p. — ISBN: 978-9931-9994-6-1
+          </div>
+
+          <!-- ✅ RÉSUMÉ REPLIABLE -->
+          <div class="summary-preview" id="summary-preview-1">
+            Cet ouvrage réalisé sous la direction de Mouloud GUERCHOUH explore la montée en puissance de la Responsabilité Sociétale des Entreprises (RSE) comme réponse aux dérives d’un modèle économique fondé sur la consommation excessive et la dégradation environnementale. Les entreprises, désormais conscientes de leur rôle dans la préservation de la planète, intègrent les principes du Développement Durable à travers la RSE, véritable levier de transformation stratégique et organisationnelle...
+          </div>
+          <div class="summary-full" id="summary-full-1">
+            <p>Les entreprises, désormais conscientes de leur rôle dans la préservation de la planète, intègrent les principes du Développement Durable à travers la RSE, véritable levier de transformation stratégique et organisationnelle. En Algérie, l’adoption de la norme ISO 26000 dès 2011 marque un tournant, incitant plusieurs entreprises à formaliser leurs démarches responsables.</p>
+            <p>L’ouvrage analyse la genèse, l’évolution et les mécanismes de la RSE dans le contexte algérien, en s’interrogeant sur ses impacts sur la gouvernance, la culture d’entreprise et les relations avec les parties prenantes. Il met en lumière les défis, opportunités et contraintes liés à cette intégration, tout en soulignant les effets sur la compétitivité, la durabilité et la réputation des entreprises.</p>
+            <p>Structuré en trois parties, il aborde successivement les liens entre RSE et innovation, la transformation sociétale qu’elle induit, et les synergies avec le développement durable. L’ensemble vise à proposer une réflexion sur les pratiques, outils et perspectives pour une RSE adaptée au contexte socio-économique algérien.</p>
+            <p style="margin-top: 0.8rem; font-style: italic; color: #2c3e50;">
+              <strong>Mots-clés :</strong> Responsabilité Sociétale des Entreprises (RSE), Développement Durable, ISO 26000, gouvernance, innovation, transformation organisationnelle, parties prenantes, performance durable, Algérie, compétitivité, durabilité, stratégie.
+            </p>
+          </div>
+          <button class="toggle-btn" onclick="toggleSummary(1)">Lire la suite</button>
+
+          <a href="#" class="btn">Consulter la fiche</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deuxième ouvrage -->
+    <div class="publication">
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
+        <div style="flex: 0 0 200px; max-width: 200px;">
+          <img src="couvertures/guerchouhouvrage2.jpg" 
+               alt="Couverture : Gouvernance d’entreprise et Efficience Organisationnelle"
+               style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <div class="publication-title">
+            Gouvernance d’entreprise et Efficience Organisationnelle
+            <p style='text-align: left; margin: 0; margin-top: 0px; padding-bottom: 5px; padding-left: 0px; padding-right: 0px; font-family: Segoe UI; font-size: 16px; color: #285982; background-color: white;'>
+              Regard critique sur les grandes entreprises en Algérie
+            </p>
+          </div>
+          <div class="publication-authors">
+            <div>Sous la direction de <b>Mouloud GUERCHOUH</b></div>
+            <div>Préface <b>Djamal SI-MOHAMMED</b></div>
+          </div>
+          <div class="publication-details">
+            Édition DEFI, 2025 — 220 p. — ISBN: 978-9931-9994-7-8
+          </div>
+
+          <!-- ✅ RÉSUMÉ REPLIABLE -->
+          <div class="summary-preview" id="summary-preview-2">
+            Cet ouvrage, issu de plusieurs années de recherche et fondé sur nos travaux doctoraux ainsi que sur les projets CNEPRU et PRFU, propose une analyse approfondie des systèmes de gouvernance et de leur impact sur l’efficience organisationnelle des grandes entreprises, notamment en Algérie. Il allie rigueur scientifique et accessibilité, offrant à la fois une réflexion théorique solide et un outil de vulgarisation destiné à un large public...
+          </div>
+          <div class="summary-full" id="summary-full-2">
+            <p>À travers une approche théorique et empirique, l’ouvrage examine les structures de propriété, les processus décisionnels, les mécanismes de contrôle interne et les relations de pouvoir au sein des organisations. Il met en évidence les forces et faiblesses des modèles de gouvernance existants, tout en proposant des pistes d’amélioration et d’adaptation aux réalités économiques locales.</p>
+            <p>En traitant des notions de transparence, de responsabilité et d’architecture organisationnelle, il vise à renforcer la compréhension et la performance des entreprises algériennes. Par sa double ambition — scientifique et pédagogique —, cet ouvrage constitue une référence pour ceux qui s’intéressent aux enjeux contemporains de la gouvernance et de la performance organisationnelle.</p>
+            <p style="margin-top: 0.8rem; font-style: italic; color: #2c3e50;">
+              <strong>Mots-clés :</strong> gouvernance, théories et approches de la gouvernance, efficience organisationnelle, mécanismes de gouvernance, systèmes nationaux de gouvernance, entreprises algériennes, architecture organisationnelle.
+            </p>
+          </div>
+          <button class="toggle-btn" onclick="toggleSummary(2)">Lire la suite</button>
+
+          <a href="https://drive.google.com/uc?export=download&id=1VsqdF_yZkE1h-O5a8XsG-b-IyxVjIb5Y" 
+             class="btn" 
+             download="Extrait_Gouvernance_DEFI.pdf"
+             target="_blank"
+             rel="noopener noreferrer">
+             Extrait
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 2rem; font-style: italic; display: flex; align-items: center; gap: 0.6rem;">
+      <img src="icons/livre.png" alt="Icône livre" width="24" height="24" style="vertical-align: middle;">
+      Pour toute publication, contactez-nous à 
+      <a href="mailto:contact.defi@ummto.dz">contact.defi@ummto.dz</a>.
+    </p>
+  </main>
+
+  <footer>
+    <p>Laboratoire DEFI © 2025 — UMMTO</p>
+  </footer>
+
+  <script>
+    // Supprime no-js si JS activé
+    document.documentElement.classList.remove('no-js');
+    
+    function toggleSummary(id) {
+      const full = document.getElementById('summary-full-' + id);
+      const btn = event.target;
+      if (full.style.display === 'block') {
+        full.style.display = 'none';
+        btn.classList.remove('active');
+        btn.textContent = 'Lire la suite';
+      } else {
+        full.style.display = 'block';
+        btn.classList.add('active');
+        btn.textContent = 'Masquer';
+      }
+    }
+
+    // Mobile menu
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('active');
+      const bars = this.querySelectorAll('.bar');
+      this.classList.toggle('active');
+      if (this.classList.contains('active')) {
+        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+      } else {
+        bars[0].style.transform = 'rotate(0)';
+        bars[1].style.opacity = '1';
+        bars[2].style.transform = 'rotate(0)';
+      }
+    });
+  </script>
+</body>
+</html>
