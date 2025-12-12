@@ -3,288 +3,386 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEFI — Laboratoire de Recherche</title>
+  <title>PLANNINGS EMD – Département des Sciences de Gestion</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-dark: #1e40af;
+      --secondary: #0f766e;
+      --light: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --border-radius: 10px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --transition: all 0.3s ease;
+    }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f9f9f9;
-    }
-    a {
-      text-decoration: none;
-      color: #1a5276;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
 
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f0f4f8;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 20px;
+    }
 
     header {
-      background-color: #1a5276;
-      color: white;
-      padding: 1rem 2rem;
       text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
     }
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .logo h1 {
-      font-size: 1.8rem;
+
+    header h1 {
       font-weight: 700;
-    }
-    .logo p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    nav {
-      background-color: #2874a6;
-      padding: 0.8rem 0;
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-    .nav-menu {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .nav-menu a {
-      color: white;
-      font-weight: 500;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .nav-menu a:hover {
-      background-color: rgba(255,255,255,0.15);
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-
-    .hero {
-      background: linear-gradient(rgba(26, 82, 118, 0.9), rgba(26, 82, 118, 0.8)), url('https://images.unsplash.com/photo-1553877522-4324936051-f9e84e476e02?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-      border-radius: 8px;
-      margin-bottom: 2.5rem;
-    }
-    .hero h2 {
       font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto 1.5rem;
+      color: var(--primary);
+      margin-bottom: 8px;
     }
 
-    .sections {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
-    .section-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 1.8rem;
-      transition: transform 0.3s;
-    }
-    .section-card:hover {
-      transform: translateY(-5px);
-    }
-    .section-card h3 {
-      color: #1a5276;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-    .section-card ul {
-      padding-left: 1.5rem;
-    }
-    .section-card li {
-      margin-bottom: 0.5rem;
+    header p {
+      color: var(--gray-700);
+      font-size: 1.05rem;
     }
 
-    footer {
-      background-color: #1a5276;
-      color: white;
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 2rem;
-    }
-    footer p {
-      margin: 0.3rem 0;
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      justify-content: center;
     }
 
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
+    .tab-btn {
+      padding: 12px 20px;
+      background: var(--gray-100);
+      border: none;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--gray-700);
       cursor: pointer;
-      padding: 0.5rem;
+      transition: var(--transition);
+      white-space: nowrap;
     }
-    .bar {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 3px 0;
-      transition: 0.3s;
+
+    .tab-btn:hover {
+      background: var(--gray-200);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .level-header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timetable-table th {
+      background: var(--gray-100);
+      color: var(--gray-900);
+      font-weight: 600;
+      text-align: left;
+      padding: 14px 16px;
+      position: sticky;
+      top: 0;
+    }
+
+    .timetable-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: top;
+    }
+
+    .timetable-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .timetable-table tr:hover {
+      background-color: #f8fafc;
+    }
+
+    .timetable-table pre {
+      margin: 0;
+      font-family: inherit;
+      white-space: pre-line;
+      font-size: 0.95rem;
+      color: var(--gray-700);
+    }
+
+    .timetable-table td:first-child {
+      font-weight: 600;
+      color: var(--primary-dark);
     }
 
     @media (max-width: 768px) {
-      .nav-menu {
-        display: none;
+      .tabs-container {
         flex-direction: column;
         align-items: center;
-        gap: 0.8rem;
-        padding: 1rem;
-        background-color: #1a5276;
-      }
-      .nav-menu.active {
-        display: flex;
-      }
-      .menu-toggle {
-        display: flex;
       }
 
-      .hero h2 { font-size: 1.8rem; }
-      .hero p { font-size: 1rem; }
+      .tab-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .level-header {
+        font-size: 1.15rem;
+        padding: 14px 16px;
+      }
+
+      .timetable-table th,
+      .timetable-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      header h1 { font-size: 1.8rem; }
     }
-	.logo img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-.section-card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-}
-.section-card-link:hover .section-card {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-}
+
+    @media print {
+      body { padding: 0; background: white; }
+      .tabs-container { display: none; }
+      .tab-content { display: block !important; }
+      .tab-content:not(.active) { display: none !important; }
+      .level-header { page-break-before: always; }
+    }
   </style>
 </head>
 <body>
+
   <header>
-<div class="logo">
-  <img src="logo-defi.png" alt="Logo du Laboratoire DEFI - Développement, Économie, Finance et Institutions" width="300">
-</div>
+    <h1>PLANNINGS DES ÉPREUVES EMD</h1>
+    <p>Département des Sciences de Gestion – UMMTO<br><small>Janvier 2026</small></p>
   </header>
 
-  <nav>
-    <div class="nav-container">
-      <div class="menu-toggle" id="mobile-menu">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-      <ul class="nav-menu" id="nav-menu">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="presentation.html">Présentation</a></li>
-        <li><a href="index.html#axes">Axes</a></li>
-        <li><a href="emploidutemps.html">Équipe</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="colloque.html">Colloques</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-    <section class="hero">
-      <h2>Recherche en économie, finance et développement</h2>
-      <p>Au cœur de la Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion — Université Mouloud Mammeri de Tizi-Ouzou.</p>
-    </section>
-
-    <section class="sections">
-   <a href="presentation.html" class="section-card-link">
-  <div class="section-card" id="presentation">
-    <h3>Présentation</h3>
-    <p>Le laboratoire <strong>DEFI</strong> (Développement, Économie, Finance et Institutions) est une unité de recherche dédiée à l’analyse des enjeux économiques et institutionnels au niveau local, national et international.</p>
-  </div>
-</a>
-
-      <div class="section-card" id="axes">
-        <h3>Axes de recherche</h3>
-        <ul>
-          <li>Développement économique et inégalités</li>
-          <li>Finance publique et politique budgétaire</li>
-          <li>Institutions et gouvernance économique</li>
-          <li>Économie de l’énergie et transition écologique</li>
-        </ul>
-      </div>
-
-      <div class="section-card" id="equipe">
-        <h3>Équipe</h3>
-        <p>Composée de professeurs, maîtres de conférences, doctorants et chercheurs associés, l’équipe DEFI encourage la collaboration interdisciplinaire et les partenariats académiques.</p>
-      </div>
-    </section>
-
-    <section class="section-card" id="contact">
-      <h3>Contact</h3>
-      <p><strong>Adresse :</strong> Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion<br>
-      Université Mouloud Mammeri — Tizi-Ouzou, Algérie</p>
-      <p><strong>Courriel :</strong> <a href="mailto:contact.defi@ummto.dz">contact.defi@ummto.dz</a></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>Laboratoire DEFI © 2025 — Université Mouloud Mammeri de Tizi-Ouzou</p>
-    <p>Faculté des Sciences Économiques, Commerciales et des Sciences de Gestion</p>
-  </footer>
+  <div class="tabs-container" id="tabs"></div>
+  <div id="contents"></div>
 
   <script>
+    const data = {
+      "L1-SCIENCES DE GESTION": [
+        { jour: "Jeudi 18/12/2024", horaire: "09h00–10h30", matiere: "Anglais", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Dimanche 04/01/2026", horaire: "11h00–12h30", matiere: "Comptabilité financière", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Mardi 06/01/2026", horaire: "11h00–12h30", matiere: "Introduction au droit", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Jeudi 08/01/2026", horaire: "11h00–12h30", matiere: "Introduction à l'économie", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Dimanche 11/01/2026", horaire: "11h00–12h30", matiere: "Microéconomie", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Mardi 13/01/2026", horaire: "11h00–12h30", matiere: "Introduction au Python", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Jeudi 15/01/2026", horaire: "11h00–12h30", matiere: "Statistiques", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Dimanche 18/01/2026", horaire: "11h00–12h30", matiere: "Introduction à la sociologie des organisations", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" },
+        { jour: "Mardi 20/01/2026", horaire: "11h00–12h30", matiere: "Mathématiques", lieu: "Amphi Belhouas : G21, G22, ½G23\nAmphi Benyahia : ½G23, G24, G25\nAmphi Mammeri : G26, G27, ½G28\nAmphi Amzal : ½G28, G29, G30\nSalles A6-A16, B3-B6, C1,C3-C5, SG : G31 à G40 (½ groupe par salle)" }
+      ],
+      "L2-SCIENCES DE GESTION": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité de gestion", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Économie monétaire", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Statistiques 3", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Introduction au management", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Finance publique", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Mathématiques financières", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Macroéconomie I", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
+        { jour: "Lundi 19/01/2026", horaire: "13h00–14h30", matiere: "Méthodologie", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" }
+      ],
+      "L3-MANAGEMENT": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Structure et organisation de l'entreprise", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Management des projets", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Management financier", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Droit des affaires", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "MRH", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Techniques de sondage", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Management de la TI", lieu: "G1+1/2G2  Amphi Hameg\nG1+1/2G2  Amphi Hambli" }
+      ],
+      "L3-ENTREPRENARIAT": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "stratégie d'entreprise", lieu: "Salle 01 Bloc A" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Techniques de gestion 1", lieu: "Salle 01 Bloc A" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Entrepreneuriat", lieu: "Salle 01 Bloc A" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "MCI", lieu: "Salle 01 Bloc A" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "MRH", lieu: "Salle 01 Bloc A" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Droit des sociétés et startups", lieu: "Salle 01 Bloc A" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Techniques de sondage", lieu: "Salle 01 Bloc A" }
+      ],
+      "L3-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Principes du MRH", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Management des carrières", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Communication organisationnelle", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Management stratégique", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Droit du travail", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Techniques de sondage\nManagement stratégique\nManagement de la TI", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Management de la TI", lieu: "Salle 01 Bloc B\nSalle 02 Bloc B" }
+      ],
+      "M1-GESTION PUBLIQUE": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Droit administratif", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Nouvelle gestion publique", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité publique", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Gestion budgétaire des CL", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Marchés publics", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" }
+      ],
+      "M1-MANAGEMENT FINANCIER": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Ingénierie financière", lieu: "Amphi Amzal" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Planification et contrôle financier", lieu: "Amphi Amzal" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Management financier avancé", lieu: "Amphi Amzal" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité des sociétés", lieu: "Amphi Amzal" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Amphi Amzal" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Analyse des séries temporelles", lieu: "Amphi Amzal" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "E-Management", lieu: "Amphi Amzal" }
+      ],
+      "M1-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité et fin des établissements de santé", lieu: "Salle 03 Bloc A" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Économie de la santé et de la protection sociale 1", lieu: "Salle 03 Bloc A" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Introduction au management hospitalier", lieu: "Salle 03 Bloc A" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Le management des services publics", lieu: "Salle 03 Bloc A" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "MRH en milieu Hosp", lieu: "Salle 03 Bloc A" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Système d'information mathématique et statistique", lieu: "Salle 03 Bloc A" }
+      ],
+      "M1-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Knowledge management", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "MS des RH", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Intelligence stratégique", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "MCI", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Analyse stratégique et compétitive", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" }
+      ],
+      "M1-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Ingénierie fonctionnelle", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Comportement organisationnel", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Contrôle managérial social", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Culture de l'organisation", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Management des salaires et des incitations 01", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" }
+      ],
+      "M2-GESTION PUBLIQUE": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Conception et analyse des PP", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Contrôle de GP", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Droit des établissements publics", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Gestion et obligation des SP", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Management électronique", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Opérations de trésorerie", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" }
+      ],
+      "M2-MANAGEMENT FINANCIER": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Technologie financière", lieu: "Salle 13 Bloc A\nSalle 14 Bloc A" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Management des IFF", lieu: "Salle 13 Bloc A\nSalle 14 Bloc A" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Opérations de trésorerie", lieu: "Salle 13 Bloc A\nSalle 14 Bloc A" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Finance islamique", lieu: "Salle 13 Bloc A\nSalle 14 Bloc A" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Management des risques financiers", lieu: "Salle 13 Bloc A\nSalle 14 Bloc A" }
+      ],
+      "M2-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Entrepreneuriat", lieu: "Salle 12 Bloc A" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Gestion du changement", lieu: "Salle 12 Bloc A" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Sécurité du patient et gestion des risques hosp.", lieu: "Salle 12 Bloc A" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Gestion et évaluation de la qualité en milieu hosp.", lieu: "Salle 12 Bloc A" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Méthodologie de la recherche", lieu: "Salle 12 Bloc A" }
+      ],
+      "M2-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Management des réseaux sociaux", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Management de changement strat.", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Contrôle stratégique", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Stratégies de croissance et l'int.", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Droit de la concurrence et protection des conso.", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" }
+      ],
+      "M2-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Leadership administratif", lieu: "Salle 09 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 06/01/2026", horaire: "13h00–14h30", matiere: "Droit de la fonction pub", lieu: "Salle 09 Bloc A\n(voir les listes affichées)" },
+        { jour: "Jeudi 08/01/2026", horaire: "13h00–14h30", matiere: "Management des compétences", lieu: "Salle 09 Bloc A\n(voir les listes affichées)" },
+        { jour: "Dimanche 11/01/2026", horaire: "13h00–14h30", matiere: "Management de changement", lieu: "Salle 09 Bloc A\n(voir les listes affichées)" },
+        { jour: "Mardi 13/01/2026", horaire: "13h00–14h30", matiere: "Management des risques sociaux", lieu: "Salle 09 Bloc A\n(voir les listes affichées)" }
+      ]
+    };
 
-    document.getElementById('mobile-menu').addEventListener('click', function() {
-      const navMenu = document.getElementById('nav-menu');
-      navMenu.classList.toggle('active');
-      
-      // Animation du burger → ×
-      const bars = this.querySelectorAll('.bar');
-      this.classList.toggle('active');
-      if (this.classList.contains('active')) {
-        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-        bars[1].style.opacity = '0';
-        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-      } else {
-        bars[0].style.transform = 'rotate(0)';
-        bars[1].style.opacity = '1';
-        bars[2].style.transform = 'rotate(0)';
-      }
+    const tabsContainer = document.getElementById('tabs');
+    const contentsContainer = document.getElementById('contents');
+
+    Object.keys(data).forEach((level, idx) => {
+      const isActive = idx === 0;
+
+      // Créer bouton
+      const btn = document.createElement('button');
+      btn.textContent = level;
+      btn.className = `tab-btn ${isActive ? 'active' : ''}`;
+      btn.onclick = () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${idx}`).classList.add('active');
+      };
+      tabsContainer.appendChild(btn);
+
+      // Créer contenu
+      const content = document.createElement('div');
+      content.id = `tab-${idx}`;
+      content.className = `tab-content ${isActive ? 'active' : ''}`;
+
+      const header = document.createElement('div');
+      header.className = 'level-header';
+      header.textContent = level;
+      content.appendChild(header);
+
+      const table = document.createElement('table');
+      table.className = 'timetable-table';
+
+      const thead = `<thead><tr>
+        <th>Jour</th>
+        <th>Horaire</th>
+        <th>Matière</th>
+        <th>Lieux</th>
+      </tr></thead>`;
+      table.innerHTML = thead;
+
+      const tbody = document.createElement('tbody');
+      data[level].forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.jour}</td>
+          <td>${row.horaire}</td>
+          <td>${row.matiere}</td>
+          <td><pre>${row.lieu}</pre></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      content.appendChild(table);
+      contentsContainer.appendChild(content);
     });
   </script>
+
 </body>
-
 </html>
-
-
-
