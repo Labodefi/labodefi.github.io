@@ -98,14 +98,13 @@
       text-align: center;
     }
 
-    /* ——— L1 : suppression des bordures HORIZONTALES dans colonnes 5 & 6 ——— */
+
     .l1-table td:nth-child(5),
     .l1-table td:nth-child(6) {
       border-top: none;
       border-bottom: none;
     }
 
-    /* Restaurer bordure HAUT (1ère ligne) et BAS (dernière ligne) */
     .l1-table tr:first-child td:nth-child(5),
     .l1-table tr:first-child td:nth-child(6),
     .l1-table tr:last-child td:nth-child(5),
@@ -114,7 +113,7 @@
       border-bottom: 1px solid var(--gray-200);
     }
 
-    /* ——— Contenu ——— */
+
     .timetable-table pre {
       margin: 0;
       font-family: inherit;
@@ -140,11 +139,10 @@
   <div id="contents"></div>
 
   <script>
-    // Données — L1 EXACTEMENT comme dans votre code (rowspan)
+
     const data = {
       "L1-SCIENCES DE GESTION": {
-        // On ne stocke pas les lignes individuelles — on génère directement le tbody avec rowspan
-        // → le rendu est fait manuellement, comme dans votre exemple
+
       },
       "L2-SCIENCES DE GESTION": [
         { jour: "Dimanche 04/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité de gestion", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
@@ -291,7 +289,6 @@
       header.textContent = level;
       content.appendChild(header);
 
-      // ————— L1 : CODE EXACTEMENT COMME VOUS L’AVEZ FOURNI —————
       if (level === "L1-SCIENCES DE GESTION") {
         content.innerHTML = `
           <table class="timetable-table l1-table">
@@ -340,7 +337,7 @@ C.5 => ½G40
 Salle machine SG => ½G40</pre>
                 </td>
               </tr>
-              <tr><td>Dimanche 04/01/2026</td><td>11h00–12h30</td><td>Comptabilité financière</td><td></td></tr>
+              <tr><td>Dimanche 04/01/2025</td><td>11h00–12h30</td><td>Comptabilité financière</td><td></td></tr>
               <tr><td>Mardi 06/01/2026</td><td>11h00–12h30</td><td>Introduction au droit</td><td></td></tr>
               <tr><td>Jeudi 08/01/2026</td><td>11h00–12h30</td><td>Introduction à l'économie</td><td></td></tr>
               <tr><td>Dimanche 11/01/2026</td><td>11h00–12h30</td><td>Microéconomie</td><td></td></tr>
@@ -382,4 +379,5 @@ Salle machine SG => ½G40</pre>
 
 </body>
 </html>
+
 
