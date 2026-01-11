@@ -98,7 +98,6 @@
       text-align: center;
     }
 
-
     .l1-table td:nth-child(5),
     .l1-table td:nth-child(6) {
       border-top: none;
@@ -112,7 +111,6 @@
       border-top: 1px solid var(--gray-200);
       border-bottom: 1px solid var(--gray-200);
     }
-
 
     .timetable-table pre {
       margin: 0;
@@ -139,11 +137,8 @@
   <div id="contents"></div>
 
   <script>
-
     const data = {
-      "L1-SCIENCES DE GESTION": {
-
-      },
+      "L1-SCIENCES DE GESTION": {},
       "L2-SCIENCES DE GESTION": [
         { jour: "Mercredi 14/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité de gestion", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
         { jour: "Jeudi 15/01/2026", horaire: "13h00–14h30", matiere: "Économie monétaire", lieu: "Amphi Belhouas: G1+G2\nAmphi Benyahia: G3+G4\nAmphi Mammeri: G5+G6" },
@@ -187,8 +182,8 @@
         { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité publique", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
         { jour: "Lundi 19/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
         { jour: "Mercredi 21/01/2026", horaire: "13h00–14h30", matiere: "Gestion budgétaire des CL", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
-        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Marchés publics", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" },
-        { jour: "Dimanche 25/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" }
+        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Marchés publics", lieu: "Salle 02 Bloc A\n(voir les listes affichées)" }
+        // ⬆️ "Applications et apprentissages approfondis" supprimé
       ],
       "M1-MANAGEMENT FINANCIER": [
         { jour: "Mercredi 14/01/2026", horaire: "13h00–14h30", matiere: "Ingénierie financière", lieu: "Amphi Amzal" },
@@ -213,8 +208,8 @@
         { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Intelligence stratégique", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
         { jour: "Lundi 19/01/2026", horaire: "13h00–14h30", matiere: "MCI", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
         { jour: "Mercredi 21/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
-        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Analyse stratégique et compétitive", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" },
-        { jour: "Dimanche 25/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" }
+        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Analyse stratégique et compétitive", lieu: "Salle 04 Bloc A\nSalle 05 Bloc A\nSalle 06 Bloc A\n(voir les listes affichées)" }
+        // ⬆️ "Applications et apprentissages approfondis" supprimé
       ],
       "M1-MANAGEMENT DES RESSOURCES HUMAINES": [
         { jour: "Mercredi 14/01/2026", horaire: "13h00–14h30", matiere: "Ingénierie fonctionnelle", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
@@ -222,8 +217,8 @@
         { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Comportement organisationnel", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
         { jour: "Lundi 19/01/2026", horaire: "13h00–14h30", matiere: "Contrôle managérial social", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
         { jour: "Mercredi 21/01/2026", horaire: "13h00–14h30", matiere: "Culture de l'organisation", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
-        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Management des salaires et des incitations 01", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" },
-        { jour: "Dimanche 25/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" }
+        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Management des salaires et des incitations 01", lieu: "Salle 07 Bloc A\nSalle 08 Bloc A\n(voir les listes affichées)" }
+        // ⬆️ "Applications et apprentissages approfondis" supprimé
       ],
       "M2-GESTION PUBLIQUE": [
         { jour: "Mercredi 14/01/2026", horaire: "13h00–14h30", matiere: "Conception et analyse des PP", lieu: "Salle 15 Bloc A\n(voir les listes affichées)" },
@@ -246,7 +241,7 @@
         { jour: "Dimanche 18/01/2026", horaire: "13h00–14h30", matiere: "Sécurité du patient et gestion des risques hosp.", lieu: "Salle 12 Bloc A" },
         { jour: "Lundi 19/01/2026", horaire: "13h00–14h30", matiere: "Gestion et évaluation de la qualité en milieu hosp.", lieu: "Salle 12 Bloc A" },
         { jour: "Mercredi 21/01/2026", horaire: "13h00–14h30", matiere: "Méthodologie de la recherche", lieu: "Salle 12 Bloc A" },
-		{ jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Gestion des risques sanitaires et résilience des systèmes de la santé", lieu: "Salle 12 Bloc A" }
+        { jour: "Jeudi 22/01/2026", horaire: "13h00–14h30", matiere: "Gestion des risques sanitaires et résilience des systèmes de la santé", lieu: "Salle 12 Bloc A" }
       ],
       "M2-MANAGEMENT STRATÉGIQUE": [
         { jour: "Mercredi 14/01/2026", horaire: "13h00–14h30", matiere: "Management des réseaux sociaux", lieu: "Salle 10 Bloc A\nSalle 11 Bloc A\n(voir les listes affichées)" },
@@ -349,9 +344,7 @@ C.2 => 1⁄2G40</pre>
             </tbody>
           </table>
         `;
-      }
-      // ————— AUTRES NIVEAUX : TABLEAU CLASSIQUE —————
-      else {
+      } else {
         const table = document.createElement('table');
         table.className = 'timetable-table';
         table.innerHTML = `
