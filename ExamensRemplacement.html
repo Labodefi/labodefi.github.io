@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLANNINGS EMD – Département des Sciences de Gestion</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-900: #0f172a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: var(--gray-900);
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 10px 10px 0 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .level-header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Tableau général */
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timetable-table th,
+    .timetable-table td {
+      padding: 10px;
+      border: 1px solid var(--gray-200);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .timetable-table th {
+      background: var(--gray-100);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .l1-table td:nth-child(5),
+    .l1-table td:nth-child(6) {
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .l1-table tr:first-child td:nth-child(5),
+    .l1-table tr:first-child td:nth-child(6),
+    .l1-table tr:last-child td:nth-child(5),
+    .l1-table tr:last-child td:nth-child(6) {
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .timetable-table pre {
+      margin: 0;
+      font-family: inherit;
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .tabs-container { flex-direction: column; align-items: center; }
+      .tab-btn { width: 100%; max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PLANNINGS DES EXAMENS DE REMPLACEMENTS</h1>
+    <p>Département des Sciences de Gestion – UMMTO<br><small>Janvier 2026</small></p>
+  </header>
+
+  <div class="tabs-container" id="tabs"></div>
+  <div id="contents"></div>
+
+  <script>
+    const data = {
+      "L1-SCIENCES DE GESTION": {},
+      "L2-SCIENCES DE GESTION": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Comptabilité de gestion", lieu: "Amphi Benyahia" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Économie monétaire", lieu: "Amphi Benyahia" },
+        { jour: "Mardi 27/01/2026", horaire: "14h30–16h00", matiere: "Statistiques 3", lieu: "Amphi Benyahia" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Introduction au management", lieu: "Amphi Benyahia" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Finance publique", lieu: "Amphi Benyahia" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "Mathématiques financières", lieu: "Amphi Benyahia" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Macroéconomie I", lieu: "Amphi Benyahia" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h00", matiere: "Méthodologie", lieu: "Amphi Benyahia" }
+      ],
+      "L3-MANAGEMENT": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Structure et organisation de l'entreprise", lieu: "Amphi Hameg" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Management des projets", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Management financier", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Droit des affaires", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "MRH", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Techniques de sondage", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Management de la TI", lieu: "Amphi Hameg" }
+      ],
+      "L3-ENTREPRENARIAT": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Entrepreneuriat 2", lieu: "Amphi Hameg" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "MCI", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Techniques de gestion 1", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Stratégie de l'entreprise", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "MRH", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Techniques de sondage", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Droit des sociétés et startups", lieu: "Amphi Hameg" }
+      ],
+      "L3-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Principes du MRH", lieu: "Amphi Hambli" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Management des carrières", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Communication organisationnelle", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Management stratégique", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "Droit du travail", lieu: "Amphi Hambli" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Techniques de sondage\nManagement stratégique\nManagement de la TI", lieu: "Amphi Hambli" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Management de la TI", lieu: "Amphi Hambli" }
+      ],
+      "M1-GESTION PUBLIQUE": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Droit administratif", lieu: "Salle 02 Bloc A" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Nouvelle gestion publique", lieu: "Salle 02 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Comptabilité publique", lieu: "Salle 02 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Salle 02 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "Gestion budgétaire des CL", lieu: "Salle 02 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Marchés publics", lieu: "Salle 02 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Salle 02 Bloc A" }
+      ],
+      "M1-MANAGEMENT FINANCIER": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Ingénierie financière", lieu: "Amphi Amzal" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Planification et contrôle financier", lieu: "Amphi Amzal" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Management financier avancé", lieu: "Amphi Amzal" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Comptabilité des sociétés", lieu: "Amphi Amzal" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "CRA", lieu: "Amphi Amzal" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Analyse des séries temporelles", lieu: "Amphi Amzal" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "E-Management", lieu: "Amphi Amzal" }
+      ],
+      "M1-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Comptabilité et fin des établissements de santé", lieu: "Salle 6 Bloc A" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Économie de la santé et de la protection sociale 1", lieu: "Salle 6 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Introduction au management hospitalier", lieu: "Salle 6 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Le management des services publics", lieu: "Salle 6 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "MRH en milieu Hosp", lieu: "Salle 6 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Système d'information mathématique et statistique", lieu: "Salle 6 Bloc A" }
+      ],
+      "M1-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Knowledge management", lieu: "Amphi Hameg" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "MS des RH", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Intelligence stratégique", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "MCI", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "CRA", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Méthodologie de la recherche", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Amphi Hameg" }
+      ],
+      "M1-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Ingénierie fonctionnelle", lieu: "Amphi Hambli" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "CRA", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Comportement organisationnel", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Contrôle managérial social", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "14h30–16h00", matiere: "Culture de l'organisation", lieu: "Amphi Hambli" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Management des salaires et des incitations 01", lieu: "Amphi Hambli" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Applications et apprentissages approfondis", lieu: "Amphi Hambli" }
+      ],
+      "M2-GESTION PUBLIQUE": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Conception et analyse des PP", lieu: "Salle 02 Bloc A" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Contrôle de GP", lieu: "Salle 02 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Droit des établissements publics", lieu: "Salle 02 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Gestion et obligation des SP", lieu: "Salle 02 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Management électronique", lieu: "Salle 02 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Opérations de trésorerie", lieu: "Salle 02 Bloc A" }
+      ],
+      "M2-MANAGEMENT FINANCIER": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Technologie financière", lieu: "Amphi Amzal" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Management des IFF", lieu: "Amphi Amzal" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Opérations de trésorerie", lieu: "Amphi Amzal" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Finance islamique", lieu: "Amphi Amzal" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Management des risques financiers", lieu: "Amphi Amzal" }
+      ],
+      "M2-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Entrepreneuriat", lieu: "Salle 6 Bloc A" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Gestion du changement", lieu: "Salle 6 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Sécurité du patient et gestion des risques hosp.", lieu: "Salle 6 Bloc A" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Gestion et évaluation de la qualité en milieu hosp.", lieu: "Salle 6 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Méthodologie de la recherche", lieu: "Salle 6 Bloc A" },
+        { jour: "Jeudi 29/01/2026", horaire: "13h00–14h30", matiere: "Gestion des risques sanitaires et résilience des systèmes de la santé", lieu: "Salle 6 Bloc A" }
+      ],
+      "M2-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Management des réseaux sociaux", lieu: "Amphi Hameg" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Management de changement strat.", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Contrôle stratégique", lieu: "Amphi Hameg" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Stratégies de croissance et l'int.", lieu: "Amphi Hameg" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Droit de la concurrence et protection des conso.", lieu: "Amphi Hameg" }
+      ],
+      "M2-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Mardi 27/01/2026", horaire: "11h00–12h30", matiere: "Leadership administratif", lieu: "Amphi Hambli" },
+        { jour: "Mardi 27/01/2026", horaire: "13h00–14h30", matiere: "Droit de la fonction pub", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "11h00–12h30", matiere: "Management des compétences", lieu: "Amphi Hambli" },
+        { jour: "Mercredi 28/01/2026", horaire: "13h00–14h30", matiere: "Management de changement", lieu: "Amphi Hambli" },
+        { jour: "Jeudi 29/01/2026", horaire: "11h00–12h30", matiere: "Management des risques sociaux", lieu: "Amphi Hambli" }
+      ]
+    };
+
+    const tabsContainer = document.getElementById('tabs');
+    const contentsContainer = document.getElementById('contents');
+
+    Object.keys(data).forEach((level, idx) => {
+      const isActive = idx === 0;
+
+      const btn = document.createElement('button');
+      btn.textContent = level;
+      btn.className = `tab-btn ${isActive ? 'active' : ''}`;
+      btn.onclick = () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${idx}`).classList.add('active');
+      };
+      tabsContainer.appendChild(btn);
+
+      const content = document.createElement('div');
+      content.id = `tab-${idx}`;
+      content.className = `tab-content ${isActive ? 'active' : ''}`;
+
+      const header = document.createElement('div');
+      header.className = 'level-header';
+      header.textContent = level;
+      content.appendChild(header);
+
+      if (level === "L1-SCIENCES DE GESTION") {
+        content.innerHTML = `
+          <table class="timetable-table l1-table">
+            <thead>
+              <tr>
+                <th>Jour</th>
+                <th>Horaire</th>
+                <th>Matière</th>
+                <th>Lieux</th>
+                <th>Section G1</th>
+                <th>Section G2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mardi 27/01/2026</td>
+                <td>11h00–12h30</td>
+                <td>Anglais</td>
+                <td></td>
+                <td rowspan="9">
+                  <pre>Amphi BELHOUS</pre>
+                </td>
+                <td rowspan="9">
+                  <pre>Amphi BELHOUS</pre>
+                </td>
+              </tr>
+              <tr><td>Mardi 27/01/2026</td><td>13h00–14h30</td><td>Comptabilité financière</td><td></td></tr>
+              <tr><td>Mardi 27/01/2026</td><td>14h30–16h00</td><td>Introduction au droit</td><td></td></tr>
+              
+			  <tr><td>Mercredi 28/01/2026</td><td>11h00–12h30</td><td>Introduction à l'économie</td><td></td></tr>
+              <tr><td>Mercredi 28/01/2026</td><td>13h00–14h30</td><td>Microéconomie</td><td></td></tr>
+              <tr><td>Mercredi 28/01/2026</td><td>14h30–16h30</td><td>Introduction au Python</td><td></td></tr>
+              <tr><td>Jeudi 29/01/2026</td><td>11h00–12h30</td><td>Statistiques</td><td></td></tr>
+              <tr><td>Jeudi 29/01/2026</td><td>13h00–14h30</td><td>Introduction à la sociologie des organisations</td><td></td></tr>
+              <tr><td>Jeudi 29/01/2026</td><td>14h30–16h30</td><td>Mathématiques</td><td></td></tr>
+            </tbody>
+          </table>
+        `;
+      }
+      // ————— AUTRES NIVEAUX : TABLEAU CLASSIQUE —————
+      else {
+        const table = document.createElement('table');
+        table.className = 'timetable-table';
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>Jour</th>
+              <th>Horaire</th>
+              <th>Matière</th>
+              <th>Lieux</th>
+            </tr>
+          </thead>
+        `;
+        const tbody = document.createElement('tbody');
+        data[level].forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${row.jour}</td><td>${row.horaire}</td><td>${row.matiere}</td><td><pre>${row.lieu}</pre></td>`;
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        content.appendChild(table);
+      }
+
+      contentsContainer.appendChild(content);
+    });
+  </script>
+
+</body>
+</html>
+
