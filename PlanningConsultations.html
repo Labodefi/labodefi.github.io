@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLANNINGS EMD – Département des Sciences de Gestion</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-900: #0f172a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: var(--gray-900);
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 10px 10px 0 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .level-header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Tableau général */
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timetable-table th,
+    .timetable-table td {
+      padding: 10px;
+      border: 1px solid var(--gray-200);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .timetable-table th {
+      background: var(--gray-100);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .timetable-table pre {
+      margin: 0;
+      font-family: inherit;
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .tabs-container { flex-direction: column; align-items: center; }
+      .tab-btn { width: 100%; max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PLANNINGS DE CONSULTATION DES COPIES</h1>
+    <p>Département des Sciences de Gestion – UMMTO<br><small>Février 2026</small></p>
+  </header>
+
+  <div class="tabs-container" id="tabs"></div>
+  <div id="contents"></div>
+
+  <script>
+    const data = {
+	
+	"L1-SECTION G1": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h00–09h30", matiere: "Comptabilité financière", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h00–09h30", matiere: "Dimanche 08/02/2026", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–11h00", matiere: "Introduction à l'économie", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–11h00", matiere: "Microéconomie", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "11h00–12h30", matiere: "Statistiques", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "11h00–12h30", matiere: "Introduction à la sociologie des organisations", lieu: "Amphi AMZAL" },
+        { jour: "Dimanche 08/02/2026", horaire: "13h00–14h30", matiere: "Mathématiques", lieu: "Amphi AMZAL" }
+        
+      ],
+	  
+	"L1-SECTION G2": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h00–09h30", matiere: "Comptabilité financière", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h00–09h30", matiere: "Introduction au droit", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–11h00", matiere: "Introduction à l'économie", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–11h00", matiere: "Microéconomie", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h00–12h30", matiere: "Statistiques", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h00–12h30", matiere: "Introduction à la sociologie des organisations", lieu: "BENYAHIA" },
+        { jour: "Jeudi 05/02/2026", horaire: "13h00–14h30", matiere: "Mathématiques", lieu: "BENYAHIA" }
+        
+      ],
+	 
+	  
+      "L2-SCIENCES DE GESTION": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h00–09h30", matiere: "Comptabilité de gestion", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h00–09h30", matiere: "Économie monétaire", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–11h00", matiere: "Statistiques 3", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–11h00", matiere: "Introduction au management", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h00–12h30", matiere: "Finance publique", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h00–12h30", matiere: "Mathématiques financières", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "13h00–14h30", matiere: "Macroéconomie I", lieu: "A.7" },
+        { jour: "Jeudi 05/02/2026", horaire: "13h00–14h30", matiere: "Méthodologie", lieu: "A.7" }
+      ],
+      "L3-MANAGEMENT": [
+        { jour: "Mercredi 04/02/2026", horaire: "08h30–09h30", matiere: "Structure et organisation de l'entreprise", lieu: "A.8" },
+        { jour: "Mercredi 04/02/2026", horaire: "08h30–09h30", matiere: "Management des projets", lieu: "A.8" },
+        { jour: "Mercredi 28/01/2026", horaire: "09h30–10h30", matiere: "Management financier", lieu: "A.8" },
+        { jour: "Mercredi 28/01/2026", horaire: "09h30–10h30", matiere: "Droit des affaires", lieu: "A.8" },
+        { jour: "Mercredi 28/01/2026", horaire: "10h30–11h30", matiere: "MRH", lieu: "A.8" },
+        { jour: "Mercredi 04/02/2026", horaire: "10h30–11h30", matiere: "Techniques de sondage", lieu: "A.8" },
+        { jour: "Mercredi 04/02/2026", horaire: "11h30–12h30", matiere: "Management de la TI", lieu: "A.8" }
+      ],
+      "L3-ENTREPRENARIAT": [
+        { jour: "Mercredi 04/02/2026", horaire: "08h30–09h30", matiere: "Entrepreneuriat 2", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "08h30–09h30", matiere: "MCI", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "09h30–10h30", matiere: "Techniques de gestion 1", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "09h30–10h30", matiere: "Stratégie de l'entreprise", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "10h30–11h30", matiere: "MRH", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "10h30–11h30", matiere: "Techniques de sondage", lieu: "A.7" },
+        { jour: "Mercredi 04/02/2026", horaire: "11h30–12h30", matiere: "Droit des sociétés et startups", lieu: "A.7" }
+      ],
+      "L3-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Principes du MRH", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Management des carrières", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Communication organisationnelle", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Management stratégique", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Droit du travail", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Techniques de sondage\nManagement stratégique\nManagement de la TI", lieu: "A.3" },
+        { jour: "Dimanche 08/02/2026", horaire: "11h30–12h30", matiere: "Management de la TI", lieu: "A.3" }
+      ],
+      "M1-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "MS des RH", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Intelligence stratégique", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "MCI", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Méthodologie de la recherche", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "CRA", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Knowledge management", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h30–12h30", matiere: "Applications et apprentissages approfondis", lieu: "A.5" }
+      ],
+      "M2-MANAGEMENT STRATÉGIQUE": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Stratégies de croissance et l'int.", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Management de changement strat.", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Management des réseaux sociaux", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Droit de la concurrence et protection des conso.", lieu: "A.5" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Contrôle stratégique", lieu: "A.5" }
+      ],
+      "M1-GESTION PUBLIQUE": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Droit administratif", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Nouvelle gestion publique", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Comptabilité publique", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Marchés publics", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "CRA", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Gestion budgétaire des CL", lieu: "A.4" },
+        { jour: "Dimanche 08/02/2026", horaire: "11h30–12h30", matiere: "Applications et apprentissages approfondis", lieu: "A.4" }
+      ],
+      "M2-GESTION PUBLIQUE": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Droit des établissements publics", lieu: "A.6" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Conception et analyse des PP", lieu: "A.6" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Contrôle de GP", lieu: "A.6" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Gestion et obligation des SP", lieu: "A.6" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Management électronique", lieu: "A.6" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Opérations de trésorerie", lieu: "A.6" }
+      ],
+      "M1-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Ingénierie fonctionnelle", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "CRA", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Comportement organisationnel", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Contrôle managérial social", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Culture de l'organisation", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Management des salaires et des incitations 01", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "11h30–12h30", matiere: "Applications et apprentissages approfondis", lieu: "A.8" }
+      ],
+      "M2-MANAGEMENT DES RESSOURCES HUMAINES": [
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Leadership administratif", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "08h30–09h30", matiere: "Droit de la fonction pub", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Management des compétences", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "09h30–10h30", matiere: "Management de changement", lieu: "A.8" },
+        { jour: "Jeudi 05/02/2026", horaire: "10h30–11h30", matiere: "Management des risques sociaux", lieu: "A.8" }
+      ],
+      "M1-MANAGEMENT FINANCIER": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Ingénierie financière", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Planification et contrôle financier", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Management financier avancé", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Comptabilité des sociétés", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "CRA", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Analyse des séries temporelles", lieu: "A.5" },
+        { jour: "Dimanche 08/02/2026", horaire: "11h00–12h30", matiere: "E-Management", lieu: "A.5" }
+      ],
+      "M2-MANAGEMENT FINANCIER": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Technologie financière", lieu: "A.6" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Management des IFF", lieu: "A.6" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Opérations de trésorerie", lieu: "A.6" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Finance islamique", lieu: "A.6" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Management des risques financiers", lieu: "A.6" }
+      ],
+	  
+      "M1-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Comptabilité et fin des établissements de santé", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Économie de la santé et de la protection sociale 1", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Introduction au management hospitalier", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Le management des services publics", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "MRH en milieu Hosp", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Système d'information mathématique et statistique", lieu: "A.7" }
+      ],
+	  
+      "M2-MANAGEMENT DES ÉTABLISSEMENTS DE SANTÉ": [
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Entrepreneuriat", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "08h30–09h30", matiere: "Gestion du changement", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Sécurité du patient et gestion des risques hosp.", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "09h30–10h30", matiere: "Gestion et évaluation de la qualité en milieu hosp.", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Méthodologie de la recherche", lieu: "A.7" },
+        { jour: "Dimanche 08/02/2026", horaire: "10h30–11h30", matiere: "Gestion des risques sanitaires et résilience des systèmes de la santé", lieu: "A.7" }
+      ]
+    };
+
+    const tabsContainer = document.getElementById('tabs');
+    const contentsContainer = document.getElementById('contents');
+
+    // Filtrer pour exclure L1 et obtenir la liste des niveaux à afficher
+    const displayLevels = Object.keys(data).filter(level => level !== "L1-SCIENCES DE GESTION");
+    
+    displayLevels.forEach((level, idx) => {
+      const isActive = idx === 0;
+
+      // Création du bouton d'onglet
+      const btn = document.createElement('button');
+      btn.textContent = level;
+      btn.className = `tab-btn ${isActive ? 'active' : ''}`;
+      btn.onclick = () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${idx}`).classList.add('active');
+      };
+      tabsContainer.appendChild(btn);
+
+      // Création du contenu de l'onglet
+      const content = document.createElement('div');
+      content.id = `tab-${idx}`;
+      content.className = `tab-content ${isActive ? 'active' : ''}`;
+
+      // En-tête du niveau
+      const header = document.createElement('div');
+      header.className = 'level-header';
+      header.textContent = level;
+      content.appendChild(header);
+
+      // Tableau standard pour tous les niveaux (L1 supprimé)
+      const table = document.createElement('table');
+      table.className = 'timetable-table';
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Horaire</th>
+            <th>Matière</th>
+            <th>Lieux</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+      
+      const tbody = table.querySelector('tbody');
+      data[level].forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.jour}</td>
+          <td>${row.horaire}</td>
+          <td>${row.matiere}</td>
+          <td><pre>${row.lieu}</pre></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      
+      content.appendChild(table);
+      contentsContainer.appendChild(content);
+    });
+  </script>
+
+</body>
+</html>
